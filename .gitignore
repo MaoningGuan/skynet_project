@@ -1,5 +1,6 @@
 #exclude dir
 output
+build
 
 # Prerequisites
 *.d
@@ -27,7 +28,7 @@ output
 
 # Shared objects (inc. Windows DLLs)
 *.dll
-*.so
+#*.so
 *.so.*
 *.dylib
 
