@@ -1,0 +1,1 @@
+./output/skynet ./etc/config
