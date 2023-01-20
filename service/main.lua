@@ -32,5 +32,4 @@ skynet.start(function ()
 
 	skynet.send(ping1, "lua", "start", ping2)
 	skynet.send(ping2, "lua", "start", ping3)
-	skynet.exit()
 end)

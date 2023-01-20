@@ -25,10 +25,12 @@ def build_me(components, myname):
         return True
     return False
 
+def test_it(projRoot):
+    logging.info("test integration start")
+    subprocess.call("{}/output/skynet {}/test/integration/test_app.conf".format(projRoot, projRoot), shell=True)
+
 #main entry
 if __name__ == '__main__': # 因此通过判断__name__的值，就可以区分py文件是直接被运行，还是被引入其他程序中 https://blog.csdn.net/wosind/article/details/90728198
-    logging.info("Start to build project...")
-
     scriptDir = os.path.dirname(os.path.realpath(__file__)) # 给出脚本的路径
     # 可以通过根据脚本的路径相对于项目的路径设置项目路径，如下面，这里我们设置项目根目录为脚本所在的文件夹
     # projRoot = os.path.abspath(os.path.join(scriptDir, "..", "..", "..")) # 给出项目的路径，所以，脚本和项目的相对位置要设置好
@@ -38,6 +40,7 @@ if __name__ == '__main__': # 因此通过判断__name__的值，就可以区分p
 
     parser = argparse.ArgumentParser() # 解析命令
     parser.add_argument('--type', help='specify build type as Release or Debug', default='debug')
+    parser.add_argument('--bt', help='specify the test type')
     args = parser.parse_args()
 
 
@@ -50,6 +53,13 @@ if __name__ == '__main__': # 因此通过判断__name__的值，就可以区分p
     else:
         logging.error("Unrecognized build type {}".format(args.type))
         sys.exit("Aborted!")
+
+    if (args.bt == "dt"):
+        test_it(projRoot)
+        logging.info("test integration end")
+        exit(0)
+
+    logging.info("Start to build project...")
 
     # 给出一些变量定义
     archSLTN = ""
